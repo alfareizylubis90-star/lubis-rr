@@ -1,0 +1,5 @@
+{
+  "name": "BankData & Transaction System",
+  "description": "A comprehensive system for managing bank accounts, customer data, and financial transactions with real-time validation and reporting.",
+  "requestFramePermissions": []
+}

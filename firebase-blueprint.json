@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "Customer": {
+      "title": "Customer",
+      "description": "Represents a bank customer and their account details.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name of the customer" },
+        "accountNumber": { "type": "string", "description": "Unique bank account number" },
+        "bankId": { "type": "string", "description": "Reference to the bank ID" },
+        "phone": { "type": "string", "description": "Customer phone number" },
+        "email": { "type": "string", "description": "Customer email address", "format": "email" },
+        "status": { "type": "string", "enum": ["active", "inactive"], "description": "Account status" },
+        "balance": { "type": "number", "description": "Current account balance" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" }
+      },
+      "required": ["name", "accountNumber", "bankId", "status", "balance"]
+    },
+    "Bank": {
+      "title": "Bank",
+      "description": "Represents a supported bank in the system.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the bank (e.g., BCA, BRI)" },
+        "code": { "type": "string", "description": "Bank code" },
+        "country": { "type": "string", "description": "Country of operation" },
+        "status": { "type": "string", "enum": ["active", "inactive"], "description": "Bank status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Bank record creation timestamp" }
+      },
+      "required": ["name", "code", "country", "status"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Represents a financial transaction.",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["deposit", "withdraw", "transfer"], "description": "Type of transaction" },
+        "amount": { "type": "number", "description": "Transaction amount" },
+        "fromAccountId": { "type": "string", "description": "Source account ID (for withdraw/transfer)" },
+        "toAccountId": { "type": "string", "description": "Destination account ID (for deposit/transfer)" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "Transaction timestamp" },
+        "status": { "type": "string", "enum": ["pending", "completed", "failed"], "description": "Transaction status" },
+        "description": { "type": "string", "description": "Transaction notes" }
+      },
+      "required": ["type", "amount", "timestamp", "status"]
+    }
+  },
+  "firestore": {
+    "customers": { "schema": "Customer", "description": "Collection of bank customers" },
+    "banks": { "schema": "Bank", "description": "Collection of supported banks" },
+    "transactions": { "schema": "Transaction", "description": "Collection of financial transactions" }
+  }
+}
